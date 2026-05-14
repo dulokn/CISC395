@@ -16,6 +16,8 @@ def main():
         print("[2] View all destinations")
         print("[3] Search by country")
         print("[4] Add note to a destination")
+        print("[6] Mark as Visited")
+        print("[7] Wishlist / Visited")
         print("[5] Quit")
         
         choice = input("Select an option: ").strip()
@@ -71,6 +73,45 @@ def main():
                         print("Invalid number.")
                 except ValueError:
                     print("Please enter a valid number.")
+
+        elif choice == "6":
+            trips = collection.get_all()
+            if len(trips) == 0:
+                print("No trips saved yet.")
+            else:
+                for i, trip in enumerate(trips, 1):
+                    status = "(Visited)" if trip.visited else "(Wishlist)"
+                    print(f"[{i}] {trip.name}, {trip.country} {status}")
+                
+                try:
+                    idx_input = int(input("Select a destination number to mark as visited: "))
+                    if 1 <= idx_input <= len(trips):
+                        trip = collection.get_by_index(idx_input - 1)
+                        collection.mark_visited(idx_input - 1)
+                        save_trips(collection)
+                        print(f"Marked {trip.name} as visited!")
+                    else:
+                        print("Invalid number.")
+                except ValueError:
+                    print("Please enter a valid number.")
+
+        elif choice == "7":
+            wishlist = collection.get_wishlist()
+            visited = collection.get_visited()
+            
+            print(f"\n--- Wishlist ({len(wishlist)}) ---")
+            if not wishlist:
+                print("No trips in wishlist.")
+            else:
+                for trip in wishlist:
+                    print(f"- {trip.name}, {trip.country}")
+            
+            print(f"\n--- Visited ({len(visited)}) ---")
+            if not visited:
+                print("No visited trips yet.")
+            else:
+                for trip in visited:
+                    print(f"- {trip.name}, {trip.country}")
                     
         elif choice == "5":
             print("Goodbye!")

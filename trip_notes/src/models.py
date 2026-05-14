@@ -8,6 +8,7 @@ class Destination:
     budget: float
     notes: list[str] = field(default_factory=list)
     date_added: str = field(default_factory=lambda: date.today().isoformat())
+    visited: bool = False
 
     def add_note(self, note: str) -> None:
         self.notes.append(note)
@@ -27,6 +28,15 @@ class TripCollection:
 
     def get_by_index(self, index: int) -> Destination:
         return self._trips[index]
+
+    def get_wishlist(self) -> list[Destination]:
+        return [trip for trip in self._trips if not trip.visited]
+
+    def get_visited(self) -> list[Destination]:
+        return [trip for trip in self._trips if trip.visited]
+
+    def mark_visited(self, index: int) -> None:
+        self._trips[index].visited = True
 
     def __len__(self) -> int:
         return len(self._trips)
