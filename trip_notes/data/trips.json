@@ -1,0 +1,23 @@
+[
+  {
+    "name": "New York",
+    "country": "USA",
+    "budget": 2000.0,
+    "notes": [],
+    "date_added": "2026-05-14"
+  },
+  {
+    "name": "Miami",
+    "country": "USA",
+    "budget": 1600.0,
+    "notes": [],
+    "date_added": "2026-05-14"
+  },
+  {
+    "name": "Bangkok",
+    "country": "Thailand",
+    "budget": 1000.0,
+    "notes": [],
+    "date_added": "2026-05-14"
+  }
+]
